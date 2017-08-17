@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>iTunes Music Search</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="container">
+
+    <header>
+      <h1>Really Awesome Music Site</h1>
+    </header>
+    <section class="player">
+      <audio class="music-player" controls="controls" src=""></audio>
+    </section>
+    <section class="search">
+      <form class="search-form">
+        
+      </form>
+    </section>
+    <section class="results"></section>
+  </div>
+  <script src="main.js"></script>
+  <form id="form" onsubmit="return false;">
+    <input style="position:absolute; top:80%; left:5%; width:40%;" type="text" id="userInput" />
+    <input style="position:absolute; top:50%; left:5%; width:40%;" type="submit" onclick="search();" />
+</form>
+</body>
+</html>
