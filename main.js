@@ -9,10 +9,10 @@ var response;
 
 
 
-button.addEventListener('click', getResults); 
+button.addEventListener('click', Search); 
 
 
-function getResults () {
+function Search () {
   userInput = input.value;
   
   event.preventDefault();
