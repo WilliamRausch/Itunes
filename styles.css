@@ -1,3 +1,21 @@
 body {
   background-color: #60d9f1;
 }
+.container{
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}
+.searchResults{
+	display: flex;
+	flex-direction: row;
+	flex-wrap: wrap;
+	
+	width: 100%;
+
+}
+.result{
+	width: 100px;
+	padding: 5px;
+	background-color: white;
+}

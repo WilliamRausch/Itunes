@@ -6,24 +6,20 @@
 </head>
 <body>
   <div class="container">
-
     <header>
-      <h1>Really Awesome Music Site</h1>
+      <h1>Awesome Music App</h1>
     </header>
     <section class="player">
-      <audio class="music-player" controls="controls" src=""></audio>
+      <audio id="music-player" controls="controls" src=""></audio>
     </section>
     <section class="search">
       <form class="search-form">
-        
+        <input class="userInput" placeholder="Search">
+        <input class= "button" type= "submit" value= "Search">
       </form>
     </section>
-    <section class="results"></section>
+    <div class="searchResults"></div>
   </div>
   <script src="main.js"></script>
-  <form id="form" onsubmit="return false;">
-    <input style="position:absolute; top:80%; left:5%; width:40%;" type="text" id="userInput" />
-    <input style="position:absolute; top:50%; left:5%; width:40%;" type="submit" onclick="search();" />
-</form>
 </body>
 </html>

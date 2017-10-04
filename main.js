@@ -1,51 +1,82 @@
-/*
-  Here is a rough idea for the steps you could take:
-*/
 
-// 1. First select and store the elements you'll be working with
-// 2. Create your `submit` event for getting the user's search term
-// 3. Create your `fetch` request that is called after a submission
-// 4. Create a way to append the fetch results to your page
-// 5. Create a way to listen for a click that will play the song in the audio play
-let container = document.querySelector(".container");
-let results;
-console.log("hello");
-var searchInput;
-function search() {
-    searchInput = document.getElementById("userInput").value;
-    alert(searchInput);
-    searchItunes();
-}
-function searchItunes(){
-fetch(`https://itunes.apple.com/search?term=${searchInput}`)
+let input = document.querySelector('.userInput');
+let button = document.querySelector('.button');
+let display= document.querySelector('.searchResults');
+
+var userInput;
+var query;
+var response;
+
+
+
+button.addEventListener('click', getResults); 
+
+
+function getResults () {
+  userInput = input.value;
   
-  .then(
-  
-    function(response) {
-  
-      if (response.status !== 200) {
-        console.log(response.status);
-        return;
-      }
-      response.json().then(function(data) {
-       	console.log(data);
-        searchResults = data;
-        console.log(results);
-        display();
-    
+  event.preventDefault();
+
+  query = userInput.split(" ").join("+");
+  let url = ("https://itunes.apple.com/search?term=" + query)
+
+    fetch(url)
+        .then(function(response){
+
+          response.json().then(function(data){
+          console.log(data);
+
+         
+
+           for (var i = 0; i < 20; i++) { 
+
+             let results = document.createElement('div');
+              results.setAttribute('class', 'result');
+              results.id = i;
+              console.log(results.id);
+
+
+
+             results.innerHTML += 
+             `
+               <div class="songContainer">
+                 <img src="${data.results[i].artworkUrl100}">
+               
+               <p class="songName">
+                 ${data.results[i].trackName}
+               </p>
+               <p class="artistName">
+                 ${data.results[i].artistName}
+                 </p>
+
+             `
+             results.addEventListener('click', function(event){
+                playSong(this.id);
+                console.log(this.id); 
+              });
+
+               display.appendChild(results);
+               function playSong(x) {
+
+                 let index = Number(x);
+                 let player = document.getElementById('music-player');
+                 let musicPreview = data.results[index].previewUrl;
+                 player.setAttribute('src', musicPreview);
+                 player.play();
+               }
+
+           }
+
+
+
+         
+
       });
-    }
-  )
-  .catch(function(err) {
-    console.log("Fetch Error :-S", err);
-  });
+
+    });
+
 }
-function display(){
-  for(i=0;i<searchResults.results.length;i++){
-  console.log(searchResults.results[i].artistViewUrl);
-  container.innerHTML += `<div class = "card${i}"><p>${searchResults.results[i].trackName}</p><h3>${searchResults.results[i].artistName}</h3><img src = "${searchResults.results[i].artistViewUrl}"></div>`
-}
-}
+
 
 
 
